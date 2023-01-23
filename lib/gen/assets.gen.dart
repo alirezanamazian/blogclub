@@ -20,6 +20,20 @@ class $AssetsImgGen {
 class $AssetsImgIconsGen {
   const $AssetsImgIconsGen();
 
+  /// File path: assets/img/icons/Articles.png
+  AssetGenImage get articles =>
+      const AssetGenImage('assets/img/icons/Articles.png');
+
+  /// File path: assets/img/icons/Home.png
+  AssetGenImage get home => const AssetGenImage('assets/img/icons/Home.png');
+
+  /// File path: assets/img/icons/Menu.png
+  AssetGenImage get menu => const AssetGenImage('assets/img/icons/Menu.png');
+
+  /// File path: assets/img/icons/Search.png
+  AssetGenImage get search =>
+      const AssetGenImage('assets/img/icons/Search.png');
+
   /// File path: assets/img/icons/category_1.png
   AssetGenImage get category1 =>
       const AssetGenImage('assets/img/icons/category_1.png');
@@ -40,9 +54,22 @@ class $AssetsImgIconsGen {
   AssetGenImage get notification =>
       const AssetGenImage('assets/img/icons/notification.png');
 
+  /// File path: assets/img/icons/plus.png
+  AssetGenImage get plus => const AssetGenImage('assets/img/icons/plus.png');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [category1, category2, category3, category4, notification];
+  List<AssetGenImage> get values => [
+        articles,
+        home,
+        menu,
+        search,
+        category1,
+        category2,
+        category3,
+        category4,
+        notification,
+        plus
+      ];
 }
 
 class $AssetsImgPostsGen {
@@ -58,6 +85,10 @@ class $AssetsImgStoriesGen {
   /// File path: assets/img/stories/story_1.jpg
   AssetGenImage get story1 =>
       const AssetGenImage('assets/img/stories/story_1.jpg');
+
+  /// File path: assets/img/stories/story_10.jpg
+  AssetGenImage get story10 =>
+      const AssetGenImage('assets/img/stories/story_10.jpg');
 
   /// File path: assets/img/stories/story_2.jpg
   AssetGenImage get story2 =>
@@ -87,9 +118,23 @@ class $AssetsImgStoriesGen {
   AssetGenImage get story8 =>
       const AssetGenImage('assets/img/stories/story_8.jpg');
 
+  /// File path: assets/img/stories/story_9.jpg
+  AssetGenImage get story9 =>
+      const AssetGenImage('assets/img/stories/story_9.jpg');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [story1, story2, story3, story4, story5, story6, story7, story8];
+  List<AssetGenImage> get values => [
+        story1,
+        story10,
+        story2,
+        story3,
+        story4,
+        story5,
+        story6,
+        story7,
+        story8,
+        story9
+      ];
 }
 
 class $AssetsImgPostsLargeGen {
