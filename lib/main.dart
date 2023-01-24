@@ -1,3 +1,4 @@
+import 'package:blogclub/carousel/carousel_slider.dart';
 import 'package:blogclub/data.dart';
 import 'package:blogclub/gen/assets.gen.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -53,6 +54,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final stories = AppDatabase.stories;
+    final categories = AppDatabase.categories;
     final textTheme = Theme.of(context).textTheme;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -86,11 +88,122 @@ class HomeScreen extends StatelessWidget {
                   style: textTheme.headline4,
                 ),
               ),
-              _StoryList(size: size, stories: stories)
+              _StoryList(size: size, stories: stories),
+              const SizedBox(
+                height: 20,
+              ),
+              _CatagoryList(categories: categories, textTheme: textTheme)
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _CatagoryList extends StatelessWidget {
+  const _CatagoryList({
+    Key? key,
+    required this.categories,
+    required this.textTheme,
+  }) : super(key: key);
+
+  final List<Category> categories;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      child: CarouselSlider.builder(
+        itemCount: categories.length,
+        itemBuilder: ((context, index, realIndex) {
+          final categoriesIndex = categories[realIndex];
+          final itemIndex = index;
+          return _CategoryItem(
+            categories: categories,
+            categoriesIndex: categoriesIndex,
+            textTheme: textTheme,
+            itemIndex: itemIndex,
+          );
+        }),
+        options: CarouselOptions(
+            padEnds: false,
+            aspectRatio: 1.3,
+            scrollPhysics: const BouncingScrollPhysics(),
+            initialPage: 0,
+            disableCenter: true,
+            enlargeCenterPage: true,
+            enlargeStrategy: CenterPageEnlargeStrategy.height,
+            enableInfiniteScroll: false,
+            scrollDirection: Axis.horizontal),
+      ),
+    );
+  }
+}
+
+class _CategoryItem extends StatelessWidget {
+  final itemIndex;
+  const _CategoryItem({
+    Key? key,
+    required this.categories,
+    required this.categoriesIndex,
+    required this.textTheme,
+    required this.itemIndex,
+  }) : super(key: key);
+
+  final List<Category> categories;
+  final Category categoriesIndex;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned(
+          top: 100,
+          right: 60,
+          left: 60,
+          bottom: 20,
+          child: Container(
+            decoration: const BoxDecoration(boxShadow: [
+              BoxShadow(blurRadius: 20, color: Color.fromARGB(112, 13, 37, 60))
+            ]),
+          ),
+        ),
+        Positioned.fill(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(itemIndex == 0 ? 32 : 20, 0,
+                itemIndex == categories.length - 1 ? 20 : 20, 35),
+            child: Container(
+              foregroundDecoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(32)),
+                gradient: LinearGradient(
+                    end: Alignment.topCenter,
+                    begin: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 13, 37, 60),
+                      Colors.transparent,
+                    ]),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(32),
+                child: Image.asset(
+                  'assets/img/posts/large/${categoriesIndex.imageFileName}',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 70,
+          left: 70,
+          child: Text(
+            categoriesIndex.title,
+            style: textTheme.headline6!.apply(color: Colors.white),
+          ),
+        )
+      ],
     );
   }
 }
